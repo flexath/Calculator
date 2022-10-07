@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="buttonNumberStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">@color/black</item>
+
+    </style>
+
+    <style name="buttonOperatorStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_weight">1</item>
+
+    </style>
+    
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="history_menu_txt">History</string>
+    <string name="setting_menu_txt">Setting</string>
+    <string name="calculator_action_title">Calculator</string>
+    <string name="feedback_txt">Feedback</string>
+    <string name="check_for_updates_txt">Check for updates</string>
+    <string name="privacy_txt">Privacy</string>
+</resources>

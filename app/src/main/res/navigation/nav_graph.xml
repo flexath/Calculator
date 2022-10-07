@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/firstFragment">
+
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.flexath.calculator.ui.home.FirstFragment">
+        <action
+            android:id="@+id/first_second_action"
+            app:destination="@id/secondFragment" />
+        <action
+            android:id="@+id/first_history_action"
+            app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/first_setting_action"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.flexath.calculator.ui.home.SecondFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_second" >
+        <action
+            android:id="@+id/second_first_action"
+            app:destination="@id/firstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.flexath.calculator.ui.menu.HistoryFragment"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.flexath.calculator.ui.menu.SettingFragment"
+        tools:layout="@layout/fragment_setting" />
+</navigation>
