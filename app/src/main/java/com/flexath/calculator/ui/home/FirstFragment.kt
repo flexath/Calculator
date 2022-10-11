@@ -1,10 +1,10 @@
 package com.flexath.calculator.ui.home
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -24,7 +24,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
     private var stack:Stack<String>? = null
     private var str:String? = String()
     private var result = 0.0
-    private val operators = mutableListOf<Any>('+','-','x','÷','%')
+    private val operators = mutableListOf<Any>('+','-','⨯','÷','%')
     private lateinit var viewModel:CalculatorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -84,7 +84,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
             else if(stack!![1] == "-") {
                 result = subtract(stack!![0].toDouble(),stack!![2].toDouble())
             }
-            else if(stack!![1] == "x") {
+            else if(stack!![1] == "⨯") {
                 result = multiply(stack!![0].toDouble(),stack!![2].toDouble())
             }
             else if(stack!![1] == "÷") {
@@ -144,6 +144,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
             }
         }
         stack?.push(txt)
+        txtOperation.text = stack?.joinToString("","","")
         return stack!!
     }
 
@@ -172,7 +173,14 @@ class FirstFragment : Fragment(),View.OnClickListener {
 
     override fun onClick(v: View?) {
         this.str = txtOperation.text.toString()
-        txtOperation.text = str
+        txtOperation.text = this.str
+
+        txtOperation.textSize = 30.0f
+        txtOperation.typeface = Typeface.DEFAULT_BOLD
+
+        txtResult.textSize = 25.0f
+        txtResult.typeface = Typeface.DEFAULT
+
         when(v?.id) {
             R.id.btnZero -> txtOperation.append("0")
             R.id.btnOne -> txtOperation.append("1")
@@ -195,7 +203,13 @@ class FirstFragment : Fragment(),View.OnClickListener {
                         }.toString()
                     }
                     stack = calculateString(this.str!!)
-                    txtResult.text =  "= " + stack?.let { calculatedResult().toString() }
+                    val resultString = "= " + stack?.let { calculatedResult().toString() }
+                    txtResult.text =  resultString
+                    txtResult.textSize = 35.0f
+                    txtResult.typeface = Typeface.DEFAULT_BOLD
+                    txtOperation.textSize = 20.0f
+                    txtOperation.typeface = Typeface.DEFAULT
+
                     val resultAndOperation = this.str + txtResult.text.toString()
                     val resultStr = CalculatorEntity(resultAndOperation)
                     viewModel.addCalculatedResult(resultStr)
@@ -204,7 +218,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
 
             R.id.btnPlus -> txtOperation.append("+")
             R.id.btnMinus -> txtOperation.append("-")
-            R.id.btnCross -> txtOperation.append("x")
+            R.id.btnCross -> txtOperation.append("⨯")
             R.id.btnDivide -> txtOperation.append("÷")
             R.id.btnPercent -> txtOperation.append("%")
             R.id.btnBackSpace -> {
