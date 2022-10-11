@@ -6,7 +6,6 @@
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">35sp</item>
         <item name="android:textColor">@color/black</item>
-
     </style>
 
     <style name="buttonOperatorStyle">
@@ -17,7 +16,15 @@
         <item name="android:adjustViewBounds">true</item>
         <item name="android:background">@color/white</item>
         <item name="android:layout_weight">1</item>
-
     </style>
-    
+
+    <style name="FeedbackBottomDialogStyle"  parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RoundedBottomDialog</item>
+    </style>
+
+    <style name="RoundedBottomDialog"  parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_dialog_style</item>
+    </style>
+
+
 </resources>

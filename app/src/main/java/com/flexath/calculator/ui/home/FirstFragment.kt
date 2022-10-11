@@ -4,10 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.flexath.calculator.R
+import com.flexath.calculator.data.CalculatorRepository
+import com.flexath.calculator.data.CalculatorViewModel
+import com.flexath.calculator.data.CalculatorViewModelFactory
+import com.flexath.calculator.data.room.CalculatorDatabase
+import com.flexath.calculator.data.room.CalculatorEntity
 import com.flexath.calculator.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_first.*
 import java.util.*
@@ -16,9 +22,10 @@ class FirstFragment : Fragment(),View.OnClickListener {
 
     private lateinit var navController: NavController
     private var stack:Stack<String>? = null
-    private var str = String()
+    private var str:String? = String()
     private var result = 0.0
     private val operators = mutableListOf<Any>('+','-','x','÷','%')
+    private lateinit var viewModel:CalculatorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_first, container, false)
@@ -32,6 +39,12 @@ class FirstFragment : Fragment(),View.OnClickListener {
         onClickSetup()
 
         txtResult.text = result.toString()
+        txtOperation.text = this.str
+
+        val dao = CalculatorDatabase.getCalculatorInstance(requireActivity()).dao
+        val repository = CalculatorRepository(dao)
+        val factory = CalculatorViewModelFactory(repository)
+        viewModel = ViewModelProvider(requireActivity(),factory)[CalculatorViewModel::class.java]
     }
 
     private fun toolBarSetup() {
@@ -39,12 +52,10 @@ class FirstFragment : Fragment(),View.OnClickListener {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menuHistory -> {
-                    Toast.makeText(requireContext(), "History menu is clicked", Toast.LENGTH_SHORT).show()
                     navController.navigate(R.id.first_history_action)
                 }
 
                 R.id.menuSetting -> {
-                    Toast.makeText(requireContext(), "Setting menu is clicked", Toast.LENGTH_SHORT).show()
                     navController.navigate(R.id.first_setting_action)
                 }
             }
@@ -60,71 +71,70 @@ class FirstFragment : Fragment(),View.OnClickListener {
 
     private fun calculatedResult() : Double {
 
-        if(stack?.size == 1) {
-            return result
+        if(stack?.get(0).toString() == "-") {       // For only one first operator
+            stack?.insertElementAt("0",0)
         }
-        else {
+
+        if(stack?.size == 1 || stack?.size == 0) {
+            return result
+        }else{
             if(stack!![1] == "+") {
                 result = add(stack!![0].toDouble(),stack!![2].toDouble())
-                stack?.removeFirst()
-                stack?.removeFirst()
-                stack?.removeFirst()
-                stack?.add(0, result.toString())
-                return calculatedResult()
             }
             else if(stack!![1] == "-") {
                 result = subtract(stack!![0].toDouble(),stack!![2].toDouble())
-                stack?.removeFirst()
-                stack?.removeFirst()
-                stack?.removeFirst()
-                stack?.add(0, result.toString())
-                return calculatedResult()
             }
             else if(stack!![1] == "x") {
                 result = multiply(stack!![0].toDouble(),stack!![2].toDouble())
-                stack?.removeFirst()
-                stack?.removeFirst()
-                stack?.removeFirst()
-                stack?.add(0, result.toString())
-                return calculatedResult()
             }
             else if(stack!![1] == "÷") {
                 result = divide(stack!![0].toDouble(),stack!![2].toDouble())
-                stack?.removeFirst()
-                stack?.removeFirst()
-                stack?.removeFirst()
-                stack?.add(0, result.toString())
-                return calculatedResult()
             }
             else if(stack!![1] == "%") {
                 result = mod(stack!![0].toDouble(),stack!![2].toDouble())
-                stack?.removeFirst()
-                stack?.removeFirst()
-                stack?.removeFirst()
-                stack?.add(0, result.toString())
-                return calculatedResult()
-            }else{
-                return result
             }
+            stack?.removeFirst()
+            stack?.removeFirst()
+            stack?.removeFirst()
+            stack?.add(0, result.toString())
+            return calculatedResult()
         }
     }
 
-    private fun calculateString(str:String) : Stack<String> {
+    private fun calculateString(string:String) : Stack<String> {
         stack = Stack<String>()
         var txt = String()
+        var str = string
+
+        while(str[0] in operators) {      // For first consecutive operators
+            if(str[0] == '-' && str[1] !in operators) {
+                stack?.push(str[0].toString())
+                break
+            }else{
+                str = StringBuilder(str).also {
+                    it.deleteCharAt(0)
+                }.toString()
+            }
+        }
+
+        txtOperation.text = str
 
         for(i in str.indices) {
+
             if(str[i] in operators) {
-                if(str[i] in operators && str[i-1] in operators) {
+                if(str[i] in operators && i == 0){
+                    continue
+                }
+                else if(str[i] in operators && str[i-1] in operators) {  // For consecutive operators
                     stack?.pop()
                     stack?.push(str[i].toString())
                     txtOperation.text = StringBuilder(str).deleteCharAt(i-1)
                 }
-                else if(str[i] in operators) {
+                else if(str[i] in operators) { // For only one operator in middle
                     stack?.push(txt)
                     stack?.push(str[i].toString())
                     txt = ""
-                } else{
+                }else{
                     stack?.push(txt)
                     txt = ""
                 }
@@ -162,7 +172,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
 
     override fun onClick(v: View?) {
         this.str = txtOperation.text.toString()
-
+        txtOperation.text = str
         when(v?.id) {
             R.id.btnZero -> txtOperation.append("0")
             R.id.btnOne -> txtOperation.append("1")
@@ -178,13 +188,18 @@ class FirstFragment : Fragment(),View.OnClickListener {
             R.id.btnDot -> txtOperation.append(".")
 
             R.id.btnEqual -> {
-                while(this.str.last() in operators) {
-                    this.str = StringBuilder(this.str).also{
-                        it.deleteCharAt(this.str.lastIndex)
-                    }.toString()
+                if(this.str!!.isNotEmpty()) {
+                    while(this.str!!.last() in operators) {
+                        this.str = StringBuilder(this.str.toString()).also{
+                            it.deleteCharAt(this.str!!.lastIndex)
+                        }.toString()
+                    }
+                    stack = calculateString(this.str!!)
+                    txtResult.text =  "= " + stack?.let { calculatedResult().toString() }
+                    val resultAndOperation = this.str + txtResult.text.toString()
+                    val resultStr = CalculatorEntity(resultAndOperation)
+                    viewModel.addCalculatedResult(resultStr)
                 }
-                stack = calculateString(this.str)
-                txtResult.text =  "= " + stack?.let { calculatedResult().toString() }
             }
 
             R.id.btnPlus -> txtOperation.append("+")
@@ -192,7 +207,11 @@ class FirstFragment : Fragment(),View.OnClickListener {
             R.id.btnCross -> txtOperation.append("x")
             R.id.btnDivide -> txtOperation.append("÷")
             R.id.btnPercent -> txtOperation.append("%")
-            R.id.btnBackSpace -> txtOperation.text = StringBuilder(this.str).deleteCharAt(this.str.lastIndex)
+            R.id.btnBackSpace -> {
+                if(this.str!!.isNotEmpty()) {
+                    txtOperation.text = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex)
+                }
+            }
             R.id.btnClear -> txtOperation.text = ""
         }
     }

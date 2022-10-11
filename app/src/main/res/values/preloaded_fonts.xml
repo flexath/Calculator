@@ -5,5 +5,8 @@
         <item>@font/cinzel_decorative</item>
         <item>@font/cinzel_decorative_bold</item>
         <item>@font/convergence</item>
+        <item>@font/roboto</item>
+        <item>@font/roboto_bold</item>
+        <item>@font/roboto_medium</item>
     </array>
 </resources>

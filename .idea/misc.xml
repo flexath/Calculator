@@ -3,14 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bottom_dialog_style.xml" value="0.1445" />
+        <entry key="app/src/main/res/drawable/button_style.xml" value="0.1445" />
+        <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.24375" />
+        <entry key="app/src/main/res/layout-land/fragment_first.xml" value="0.26510416666666664" />
         <entry key="app/src/main/res/layout-v26/activity_main.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout-v26/fragment_first.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout-v28/feedback_bottom_dialog.xml" value="0.19479166666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.16" />
-        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/feedback_bottom_dialog.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_normal_calculator.xml" value="0.16075245831551946" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.16075245831551946" />
-        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/history_list_item.xml" value="0.15989739204788372" />
         <entry key="app/src/main/res/menu/menu_item.xml" value="0.16075245831551946" />
       </map>
     </option>

@@ -9,21 +9,21 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/convergence"
         android:text="@string/setting_menu_txt"
-        android:textSize="25sp" />
+        android:textSize="30sp" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-condensed-light"
         android:textAllCaps="false"
-        android:text="About Calculator"
-        android:textSize="15sp" />
+        android:text="@string/about_calculator_txt"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,32 +31,39 @@
         android:layout_marginTop="25dp"
         android:orientation="vertical">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFeedback"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:text="@string/feedback_txt"
+            android:textSize="17sp"
             android:textAllCaps="false"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:textAlignment="viewStart"
-            android:layout_marginStart="5dp"
             android:drawableEnd="@drawable/ic_arrow"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCheckUpdate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:text="@string/check_for_updates_txt"
+            android:textSize="17sp"
             android:textAllCaps="false"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:textAlignment="viewStart"
-            android:layout_marginStart="5dp"
             android:drawableEnd="@drawable/ic_arrow"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPrivacy"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:text="@string/privacy_txt"
+            android:textSize="17sp"
             android:textAllCaps="false"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:textAlignment="viewStart"
-            android:layout_marginStart="5dp"
             android:drawableEnd="@drawable/ic_arrow"/>
 
     </LinearLayout>
+
 </LinearLayout>
