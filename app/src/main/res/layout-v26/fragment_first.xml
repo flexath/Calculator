@@ -256,8 +256,14 @@
 
                 <ImageButton
                     android:id="@+id/btnEqual"
-                    style="@style/buttonOperatorStyle"
-                    android:src="@drawable/equal" />
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:src="@drawable/equalblue"/>
 
             </LinearLayout>
 

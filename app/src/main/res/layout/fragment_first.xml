@@ -83,6 +83,7 @@
                 android:padding="10dp"
                 android:textIsSelectable="true"
                 android:cursorVisible="true"
+                android:textCursorDrawable="@color/orange_A700"
                 android:lines="3"
                 android:maxLines="3"
                 android:gravity="end"
@@ -257,7 +258,7 @@
                 <ImageButton
                     android:id="@+id/btnEqual"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/equal" />
+                    android:src="@drawable/equalblue" />
 
             </LinearLayout>
 

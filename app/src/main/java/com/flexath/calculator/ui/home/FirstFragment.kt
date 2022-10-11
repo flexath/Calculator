@@ -26,6 +26,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
     private var result = 0.0
     private val operators = mutableListOf<Any>('+','-','⨯','÷','%')
     private lateinit var viewModel:CalculatorViewModel
+    private var isEqualPressed = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_first, container, false)
@@ -117,8 +118,6 @@ class FirstFragment : Fragment(),View.OnClickListener {
             }
         }
 
-        txtOperation.text = str
-
         for(i in str.indices) {
 
             if(str[i] in operators) {
@@ -144,7 +143,8 @@ class FirstFragment : Fragment(),View.OnClickListener {
             }
         }
         stack?.push(txt)
-        txtOperation.text = stack?.joinToString("","","")
+        this.str = stack?.joinToString("","","")
+        txtOperation.text = this.str
         return stack!!
     }
 
@@ -171,6 +171,27 @@ class FirstFragment : Fragment(),View.OnClickListener {
         btnClear.setOnClickListener(this)
     }
 
+    private fun clickOnEqual() {
+        if(this.str!!.isNotEmpty()) {
+            while(this.str!!.last() in operators) {
+                this.str = StringBuilder(this.str.toString()).also{
+                    it.deleteCharAt(this.str!!.lastIndex)
+                }.toString()
+            }
+            stack = calculateString(this.str!!)
+            val resultString = "= " + stack?.let { calculatedResult().toString() }
+            txtResult.text =  resultString
+            txtResult.textSize = 35.0f
+            txtResult.typeface = Typeface.DEFAULT_BOLD
+            txtOperation.textSize = 20.0f
+            txtOperation.typeface = Typeface.DEFAULT
+
+            val resultAndOperation = this.str + txtResult.text.toString()
+            val resultStr = CalculatorEntity(resultAndOperation)
+            viewModel.addCalculatedResult(resultStr)
+        }
+    }
+
     override fun onClick(v: View?) {
         this.str = txtOperation.text.toString()
         txtOperation.text = this.str
@@ -182,40 +203,62 @@ class FirstFragment : Fragment(),View.OnClickListener {
         txtResult.typeface = Typeface.DEFAULT
 
         when(v?.id) {
-            R.id.btnZero -> txtOperation.append("0")
-            R.id.btnOne -> txtOperation.append("1")
-            R.id.btnTwo -> txtOperation.append("2")
-            R.id.btnThree -> txtOperation.append("3")
-            R.id.btnFour -> txtOperation.append("4")
-            R.id.btnFive -> txtOperation.append("5")
-            R.id.btnSix -> txtOperation.append("6")
-            R.id.btnSeven -> txtOperation.append("7")
-            R.id.btnEight -> txtOperation.append("8")
-            R.id.btnNine -> txtOperation.append("9")
+            R.id.btnZero -> {
+                txtOperation.append("0")
+//                if(isEqualPressed) txtOperation.text = "0"
+                isEqualPressed = false
+            }
+            R.id.btnOne -> {
+                txtOperation.append("1")
+                if(isEqualPressed) txtOperation.text = "1"
+                isEqualPressed = false
+            }
+            R.id.btnTwo -> {
+                txtOperation.append("2")
+                if(isEqualPressed) txtOperation.text = "2"
+                isEqualPressed = false
+            }
+            R.id.btnThree -> {
+                txtOperation.append("3")
+                if(isEqualPressed) txtOperation.text = "3"
+                isEqualPressed = false
+            }
+            R.id.btnFour -> {
+                txtOperation.append("4")
+                if(isEqualPressed) txtOperation.text = "4"
+                isEqualPressed = false
+            }
+            R.id.btnFive -> {
+                txtOperation.append("5")
+                if(isEqualPressed) txtOperation.text = "5"
+                isEqualPressed = false
+            }
+            R.id.btnSix -> {
+                txtOperation.append("6")
+                if(isEqualPressed) txtOperation.text = "6"
+                isEqualPressed = false
+            }
+            R.id.btnSeven -> {
+                txtOperation.append("7")
+                if(isEqualPressed) txtOperation.text = "7"
+                isEqualPressed = false
+            }
+            R.id.btnEight -> {
+                txtOperation.append("8")
+                if(isEqualPressed) txtOperation.text = "8"
+                isEqualPressed = false
+            }
+            R.id.btnNine -> {
+                txtOperation.append("9")
+                if(isEqualPressed) txtOperation.text = "9"
+                isEqualPressed = false
+            }
             R.id.btnBox -> {}
             R.id.btnDot -> txtOperation.append(".")
-
             R.id.btnEqual -> {
-                if(this.str!!.isNotEmpty()) {
-                    while(this.str!!.last() in operators) {
-                        this.str = StringBuilder(this.str.toString()).also{
-                            it.deleteCharAt(this.str!!.lastIndex)
-                        }.toString()
-                    }
-                    stack = calculateString(this.str!!)
-                    val resultString = "= " + stack?.let { calculatedResult().toString() }
-                    txtResult.text =  resultString
-                    txtResult.textSize = 35.0f
-                    txtResult.typeface = Typeface.DEFAULT_BOLD
-                    txtOperation.textSize = 20.0f
-                    txtOperation.typeface = Typeface.DEFAULT
-
-                    val resultAndOperation = this.str + txtResult.text.toString()
-                    val resultStr = CalculatorEntity(resultAndOperation)
-                    viewModel.addCalculatedResult(resultStr)
-                }
+                isEqualPressed = true
+                clickOnEqual()
             }
-
             R.id.btnPlus -> txtOperation.append("+")
             R.id.btnMinus -> txtOperation.append("-")
             R.id.btnCross -> txtOperation.append("⨯")
@@ -226,7 +269,12 @@ class FirstFragment : Fragment(),View.OnClickListener {
                     txtOperation.text = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex)
                 }
             }
-            R.id.btnClear -> txtOperation.text = ""
+            R.id.btnClear -> {
+                txtOperation.text = ""
+                txtResult.text = "0"
+                txtResult.textSize = 35.0f
+                txtResult.typeface = Typeface.DEFAULT_BOLD
+            }
         }
     }
 }
