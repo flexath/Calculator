@@ -13,7 +13,7 @@ It is my fifth project on android development.
 
 5 - Navigation Components
 
-### On Master Branch , these following versions are written from scratch ->
+### On Master Branch , there are following versions ->
 
 ##### Version - 1.0.0
 ##### Version - 1.1.0
