@@ -15,7 +15,8 @@ It is my fifth project on android development.
 
 ### On Master Branch , these following versions are written from scratch ->
 
-Version - 1.0.0
-Version - 1.1.0
-Version - 1.1.1
-Version - 1.1.2
+##### Version - 1.0.0
+##### Version - 1.1.0
+##### Version - 1.1.1
+##### Version - 1.1.2
+##### Version - 1.1.3
