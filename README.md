@@ -7,9 +7,11 @@ It is my fifth project on android development.
 
 2 - Room
 
-3 - ViewModel and LiveData
+3 - Dagger Hilt for Dependency Injection
 
-4 - Navigation Components
+4 - ViewModel and LiveData
+
+5 - Navigation Components
 
 ### On Master Branch , these following versions are written from scratch ->
 
