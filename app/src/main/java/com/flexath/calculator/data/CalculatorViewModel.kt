@@ -4,9 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flexath.calculator.data.room.CalculatorEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CalculatorViewModel(private val repository: CalculatorRepository) : ViewModel() {
+@HiltViewModel
+class CalculatorViewModel
+@Inject constructor(private val repository: CalculatorRepository) : ViewModel() {
 
     var calculatedResults:LiveData<List<CalculatorEntity>>? = null
 

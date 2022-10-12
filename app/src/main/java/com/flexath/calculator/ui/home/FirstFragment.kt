@@ -9,15 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.flexath.calculator.R
-import com.flexath.calculator.data.CalculatorRepository
 import com.flexath.calculator.data.CalculatorViewModel
-import com.flexath.calculator.data.CalculatorViewModelFactory
-import com.flexath.calculator.data.room.CalculatorDatabase
 import com.flexath.calculator.data.room.CalculatorEntity
 import com.flexath.calculator.ui.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_first.*
 import java.util.*
 
+@AndroidEntryPoint
 class FirstFragment : Fragment(),View.OnClickListener {
 
     private lateinit var navController: NavController
@@ -42,10 +41,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
         txtResult.text = result.toString()
         txtOperation.text = this.str
 
-        val dao = CalculatorDatabase.getCalculatorInstance(requireActivity()).dao
-        val repository = CalculatorRepository(dao)
-        val factory = CalculatorViewModelFactory(repository)
-        viewModel = ViewModelProvider(requireActivity(),factory)[CalculatorViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[CalculatorViewModel::class.java]
     }
 
     private fun toolBarSetup() {
@@ -206,7 +202,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
             R.id.btnZero -> {
                 txtOperation.append("0")
 //                if(isEqualPressed) txtOperation.text = "0"
-                isEqualPressed = false
+//                isEqualPressed = false
             }
             R.id.btnOne -> {
                 txtOperation.append("1")

@@ -1,8 +1,6 @@
 package com.flexath.calculator.ui.menu
 
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.flexath.calculator.R
 import com.flexath.calculator.adapter.CalculatorHistoryAdapter
-import com.flexath.calculator.data.CalculatorRepository
 import com.flexath.calculator.data.CalculatorViewModel
-import com.flexath.calculator.data.CalculatorViewModelFactory
-import com.flexath.calculator.data.room.CalculatorDatabase
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_history.*
 
+@AndroidEntryPoint
 class HistoryFragment : Fragment() {
 
     private var adapter:CalculatorHistoryAdapter? = null
@@ -32,10 +29,7 @@ class HistoryFragment : Fragment() {
         recyclerHistory.layoutManager = linearLayout
         recyclerHistory.setHasFixedSize(true)
 
-        val dao = CalculatorDatabase.getCalculatorInstance(requireActivity()).dao
-        val repository = CalculatorRepository(dao)
-        val factory = CalculatorViewModelFactory(repository)
-        val viewModel = ViewModelProvider(requireActivity(),factory)[CalculatorViewModel::class.java]
+        val viewModel = ViewModelProvider(requireActivity())[CalculatorViewModel::class.java]
 
         viewModel.calculatedResults?.observe(viewLifecycleOwner) {
             adapter = CalculatorHistoryAdapter(it)
