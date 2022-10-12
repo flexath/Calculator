@@ -1,7 +1,7 @@
 # Calculator
 It is my fifth project on android development.
 
-#### This project uses following features :
+#### This project uses following features , libraries and design pattern :
 
 1 - MVVM
 
