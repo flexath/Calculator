@@ -18,6 +18,8 @@
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.16075245831551946" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.22" />
         <entry key="app/src/main/res/layout/history_list_item.xml" value="0.15989739204788372" />
+        <entry key="app/src/main/res/menu-v26/delete_history_menu.xml" value="0.5" />
+        <entry key="app/src/main/res/menu/delete_history_menu.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_item.xml" value="0.16075245831551946" />
       </map>
     </option>

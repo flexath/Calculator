@@ -9,4 +9,5 @@ class CalculatorRepository
 
     var getAllCalculatedResults = dao.getAllCalculatedResults()
     suspend fun addCalculatedResult(result:CalculatorEntity) = dao.addCalculatedResult(result)
+    suspend fun deleteAllResults(resultList:List<CalculatorEntity>) = dao.deleteAllResults(resultList)
 }
