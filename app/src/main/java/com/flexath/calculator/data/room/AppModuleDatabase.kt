@@ -1,8 +1,7 @@
-package com.flexath.calculator.data
+package com.flexath.calculator.data.room
 
 import android.content.Context
 import androidx.room.Room
-import com.flexath.calculator.data.room.CalculatorDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

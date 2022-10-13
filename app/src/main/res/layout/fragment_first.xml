@@ -89,9 +89,7 @@
                 android:gravity="end"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="30sp"
-                android:autoSizeMaxTextSize="30sp"
-                android:autoSizeMinTextSize="20sp"/>
+                android:textSize="30sp"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtResult"
@@ -103,12 +101,9 @@
                 android:lines="1"
                 android:maxLines="1"
                 android:gravity="end"
-                android:text="Answer is here"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="25sp"
-                android:autoSizeMaxTextSize="25sp"
-                android:autoSizeMinTextSize="15sp"/>
+                android:textSize="25sp" />
 
             <View
                 android:id="@+id/divider"
@@ -139,22 +134,26 @@
                 <ImageButton
                     android:id="@+id/btnClear"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/copyright" />
+                    android:src="@drawable/copyright"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnBackSpace"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/backspace" />
+                    android:src="@drawable/backspace"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnPercent"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/percentage" />
+                    android:src="@drawable/percentage"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnDivide"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/divide" />
+                    android:src="@drawable/divide"
+                    android:contentDescription="@string/button_txt" />
 
             </LinearLayout>
             <LinearLayout
@@ -165,22 +164,26 @@
                 <ImageButton
                     android:id="@+id/btnSeven"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/seven" />
+                    android:src="@drawable/seven"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnEight"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/eight" />
+                    android:src="@drawable/eight"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnNine"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/nine" />
+                    android:src="@drawable/nine"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnCross"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/xmark" />
+                    android:src="@drawable/xmark"
+                    android:contentDescription="@string/button_txt" />
 
             </LinearLayout>
             <LinearLayout
@@ -191,22 +194,26 @@
                 <ImageButton
                     android:id="@+id/btnFour"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/four" />
+                    android:src="@drawable/four"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnFive"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/five" />
+                    android:src="@drawable/five"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnSix"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/six" />
+                    android:src="@drawable/six"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnMinus"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/minus" />
+                    android:src="@drawable/minus"
+                    android:contentDescription="@string/button_txt" />
 
             </LinearLayout>
             <LinearLayout
@@ -217,22 +224,26 @@
                 <ImageButton
                     android:id="@+id/btnOne"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/one" />
+                    android:src="@drawable/one"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnTwo"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/two" />
+                    android:src="@drawable/two"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnThree"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/three" />
+                    android:src="@drawable/three"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnPlus"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/add" />
+                    android:src="@drawable/add"
+                    android:contentDescription="@string/button_txt" />
 
             </LinearLayout>
             <LinearLayout
@@ -243,22 +254,26 @@
                 <ImageButton
                     android:id="@+id/btnBox"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/rotation" />
+                    android:src="@drawable/rotation"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnZero"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/zero" />
+                    android:src="@drawable/zero"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnDot"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/dot" />
+                    android:src="@drawable/dot"
+                    android:contentDescription="@string/button_txt" />
 
                 <ImageButton
                     android:id="@+id/btnEqual"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/equalblue" />
+                    android:src="@drawable/equalgreen"
+                    android:contentDescription="@string/button_txt" />
 
             </LinearLayout>
 

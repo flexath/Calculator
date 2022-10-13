@@ -13,4 +13,5 @@
     <string name="how_do_you_feel_about_calculator_txt">How do you feel about Calculator ?</string>
     <string name="confirm_txt">Confirm</string>
     <string name="cancel_txt">Cancel</string>
+    <string name="button_txt">Button</string>
 </resources>
