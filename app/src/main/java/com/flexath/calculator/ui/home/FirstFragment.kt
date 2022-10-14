@@ -29,7 +29,6 @@ class FirstFragment : Fragment(),View.OnClickListener {
     private lateinit var viewModelHistory: HistoryFragmentViewModel
     private var isEqualPressed = false
     private var isOperator = true
-    private var result = 0.0
 
     private var stack:Stack<String>? = null
     private var str:String? = String()
@@ -54,7 +53,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
         toolBarSetup()
         onClickSetup()
 
-        txtResult.text = result.toString()
+        txtResult.text = "0.0"
         txtOperation.text = this.str
 
         viewModelHistory = ViewModelProvider(requireActivity())[HistoryFragmentViewModel::class.java]
@@ -121,6 +120,23 @@ class FirstFragment : Fragment(),View.OnClickListener {
             val resultAndOperation = this.str + txtResult.text.toString()
             val resultStr = CalculatorEntity(resultAndOperation)
             viewModelHistory.addCalculatedResult(resultStr)
+        }
+    }
+
+    private fun operatorCorrection(operatorStr:String) {
+
+        if(this.str!!.isNotEmpty()) {
+            if(this.str!!.first() != '-' && this.str!!.first() in calculator.operators) {
+                txtOperation.text = ""
+            }
+            else if(this.str!!.last() in calculator.operators) {
+                this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
+                txtOperation.text = this.str
+                txtOperation.append(operatorStr)
+            }else{
+                txtOperation.text = this.str
+                txtOperation.append(operatorStr)
+            }
         }
     }
 
@@ -214,20 +230,13 @@ class FirstFragment : Fragment(),View.OnClickListener {
             R.id.btnPlus -> {
                 isOperator = true
                 if(isOperator) {
-                    if(this.str!!.last() in calculator.operators) {
-                        this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
-                    }
-                    txtOperation.text = this.str
-                    txtOperation.append("+")
+                    operatorCorrection("+")
                 }
                 isEqualPressed = false
             }
             R.id.btnMinus -> {
                 isOperator = true
                 if(isOperator) {
-                    if(this.str!!.last() in calculator.operators) {
-                        this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
-                    }
                     txtOperation.text = this.str
                     txtOperation.append("-")
                 }
@@ -236,33 +245,21 @@ class FirstFragment : Fragment(),View.OnClickListener {
             R.id.btnCross -> {
                 isOperator = true
                 if(isOperator) {
-                    if(this.str!!.last() in calculator.operators) {
-                        this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
-                    }
-                    txtOperation.text = this.str
-                    txtOperation.append("⨯")
+                    operatorCorrection("⨯")
                 }
                 isEqualPressed = false
             }
             R.id.btnDivide -> {
                 isOperator = true
                 if(isOperator) {
-                    if(this.str!!.last() in calculator.operators) {
-                        this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
-                    }
-                    txtOperation.text = this.str
-                    txtOperation.append("÷")
+                    operatorCorrection("÷")
                 }
                 isEqualPressed = false
             }
             R.id.btnPercent -> {
                 isOperator = true
                 if(isOperator) {
-                    if(this.str!!.last() in calculator.operators) {
-                        this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
-                    }
-                    txtOperation.text = this.str
-                    txtOperation.append("%")
+                    operatorCorrection("%")
                 }
                 isEqualPressed = false
             }
