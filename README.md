@@ -15,6 +15,8 @@ It is my fifth project on android development.
 
 ### On Master Branch , there are following versions ->
 
+#### ( Note that following versions on master branch do not obey order of calculation rules , it calulates left to right step by step. )
+
 ##### Version - 1.0.0
 ##### Version - 1.1.0
 ##### Version - 1.1.1
