@@ -47,29 +47,19 @@ class Calculator {
     }
 
     fun calculateString(str:String) : Stack<String> {
-
         stack = Stack<String>()
         var txt = String()
         var string = str
-        string = removeLastConsecutiveOperators(string)
-        string = removeFirstConsecutiveOperators(string)
+
+        string = removeFirstOperator(string)
 
         for (i in string.indices) {
-
             if (string[i] in operators) {
-                if(string[i] in operators && i == 0) {
-                    continue
-                }else if(string[i] in operators && string[i - 1] in operators) {  // For consecutive operators
-                    stack?.pop()
-                    stack?.push(string[i].toString())
-                }else if(string[i] in operators) { // For only one operator in middle
-                    stack?.push(txt)
-                    stack?.push(string[i].toString())
-                    txt = ""
-                }else{
+                if(txt != "") {
                     stack?.push(txt)
                     txt = ""
                 }
+                stack?.push(string[i].toString())
             }else{
                 txt += string[i]
             }
@@ -78,25 +68,13 @@ class Calculator {
         return stack!!
     }
 
-    private fun removeLastConsecutiveOperators(stringTxt:String) : String {
+    private fun removeFirstOperator(stringTxt:String) : String {
         var string = stringTxt
-        while(string.last() in operators) {          // For first consecutive operators
-            string = StringBuilder(string).also{
-                it.deleteCharAt(string.lastIndex)
-            }.toString()
-        }
-        return string
-    }
-
-    private fun removeFirstConsecutiveOperators(stringTxt:String) : String {
-        var string = stringTxt
-        while(string[0] in operators) {      // For first consecutive operators
-            if(string[0] == '-' && string[1] !in operators) {
-                stack?.push(string[0].toString())
-                break
-            }else{
-                string = (StringBuilder(string).deleteCharAt(0)).toString()
-            }
+        if(string[0] == '-') {
+            stack?.push(string[0].toString())
+            string = (StringBuilder(string).deleteCharAt(0)).toString()
+        }else if(string[0] != '-' && string[0] in operators) {
+            string = (StringBuilder(string).deleteCharAt(0)).toString()
         }
         return string
     }

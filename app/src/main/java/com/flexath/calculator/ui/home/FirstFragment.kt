@@ -112,7 +112,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
 
             txtResult.text =  resultString
 
-            txtResult.textSize = 40.0f
+            txtResult.textSize = 35.0f
             txtResult.typeface = Typeface.DEFAULT_BOLD
 
             txtOperation.textSize = 25.0f
@@ -125,7 +125,6 @@ class FirstFragment : Fragment(),View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        isOperator = true
 
         txtOperation.textSize = 40.0f
         txtOperation.typeface = Typeface.DEFAULT_BOLD
@@ -213,35 +212,55 @@ class FirstFragment : Fragment(),View.OnClickListener {
             }
 
             R.id.btnPlus -> {
+                isOperator = true
                 if(isOperator) {
+                    if(this.str!!.last() in calculator.operators) {
+                        this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
+                    }
                     txtOperation.text = this.str
                     txtOperation.append("+")
                 }
                 isEqualPressed = false
             }
             R.id.btnMinus -> {
+                isOperator = true
                 if(isOperator) {
+                    if(this.str!!.last() in calculator.operators) {
+                        this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
+                    }
                     txtOperation.text = this.str
                     txtOperation.append("-")
                 }
                 isEqualPressed = false
             }
             R.id.btnCross -> {
+                isOperator = true
                 if(isOperator) {
+                    if(this.str!!.last() in calculator.operators) {
+                        this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
+                    }
                     txtOperation.text = this.str
                     txtOperation.append("⨯")
                 }
                 isEqualPressed = false
             }
             R.id.btnDivide -> {
+                isOperator = true
                 if(isOperator) {
+                    if(this.str!!.last() in calculator.operators) {
+                        this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
+                    }
                     txtOperation.text = this.str
                     txtOperation.append("÷")
                 }
                 isEqualPressed = false
             }
             R.id.btnPercent -> {
+                isOperator = true
                 if(isOperator) {
+                    if(this.str!!.last() in calculator.operators) {
+                        this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
+                    }
                     txtOperation.text = this.str
                     txtOperation.append("%")
                 }
