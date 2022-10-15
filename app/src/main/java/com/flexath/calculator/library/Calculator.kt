@@ -51,7 +51,7 @@ class Calculator {
                 }
             }
 
-            while(stack?.contains("+") == true || stack?.contains("-") == true) {
+            if(stack?.contains("+") == true || stack?.contains("-") == true) {
                 for(i in 1 until (stack?.size!!-1) step 2) {
                     if(stack!![i] == "+") {
                         result = add(stack!![i-1].toDouble(),stack!![i+1].toDouble())
