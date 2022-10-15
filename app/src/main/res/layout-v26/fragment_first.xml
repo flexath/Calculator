@@ -149,7 +149,7 @@
                 <ImageButton
                     android:id="@+id/btnPercent"
                     style="@style/buttonOperatorStyle"
-                    android:src="@drawable/percentage"
+                    android:src="@drawable/registered"
                     android:contentDescription="@string/button_txt"/>
 
                 <ImageButton

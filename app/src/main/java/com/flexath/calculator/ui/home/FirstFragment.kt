@@ -1,8 +1,8 @@
 package com.flexath.calculator.ui.home
 
+//import com.flexath.calculator.data.viewmodels.FirstFragmentViewModelFactory
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.flexath.calculator.R
-import com.flexath.calculator.data.viewmodels.HistoryFragmentViewModel
 import com.flexath.calculator.data.room.CalculatorEntity
 import com.flexath.calculator.data.viewmodels.FirstFragmentViewModel
-//import com.flexath.calculator.data.viewmodels.FirstFragmentViewModelFactory
+import com.flexath.calculator.data.viewmodels.HistoryFragmentViewModel
 import com.flexath.calculator.library.Calculator
 import com.flexath.calculator.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +28,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
     private lateinit var viewModelHistory: HistoryFragmentViewModel
     private var isEqualPressed = false
     private var isOperator = true
+    private lateinit var resultString:String
 
     private var stack:Stack<String>? = null
     private var str:String? = String()
@@ -103,21 +103,15 @@ class FirstFragment : Fragment(),View.OnClickListener {
         if(this.str!!.isNotEmpty()) {
 
             stack = viewModelFirst.calculateString(this.str!!)
-            txtOperation.text = stack?.joinToString("","","")
+            //txtOperation.text = stack?.joinToString("","","")
 
             viewModelFirst.calculatedResult()
-            val resultString = "= " + stack?.peek().toString()
-            for(i in stack!!.elements()) Log.i("StringJoin",i)
+            resultString = stack?.peek().toString()
+            val result = "= " + stack?.peek().toString()
 
-            txtResult.text =  resultString
+            txtResult.text =  result
 
-            txtResult.textSize = 35.0f
-            txtResult.typeface = Typeface.DEFAULT_BOLD
-
-            txtOperation.textSize = 25.0f
-            txtOperation.typeface = Typeface.DEFAULT
-
-            val resultAndOperation = this.str + txtResult.text.toString()
+            val resultAndOperation = this.str + result
             val resultStr = CalculatorEntity(resultAndOperation)
             viewModelHistory.addCalculatedResult(resultStr)
         }
@@ -140,13 +134,26 @@ class FirstFragment : Fragment(),View.OnClickListener {
         }
     }
 
-    override fun onClick(v: View?) {
-
+    private fun changeResultToSmallTextSize() {
         txtOperation.textSize = 40.0f
         txtOperation.typeface = Typeface.DEFAULT_BOLD
 
         txtResult.textSize = 25.0f
         txtResult.typeface = Typeface.DEFAULT
+    }
+
+    private fun changeOperationToSmallTextSize() {
+        txtResult.textSize = 35.0f
+        txtResult.typeface = Typeface.DEFAULT_BOLD
+
+        txtOperation.textSize = 25.0f
+        txtOperation.typeface = Typeface.DEFAULT
+    }
+
+
+    override fun onClick(v: View?) {
+
+        changeResultToSmallTextSize()
 
         when(v?.id) {
             R.id.btnZero -> {
@@ -155,6 +162,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 this.str = txtOperation.text.toString()
                 isEqualPressed = false
                 isOperator = false
+                clickOnEqual()
             }
             R.id.btnOne -> {
                 if(isEqualPressed) txtOperation.text = "1"
@@ -162,6 +170,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 this.str = txtOperation.text.toString()
                 isEqualPressed = false
                 isOperator = false
+                clickOnEqual()
             }
             R.id.btnTwo -> {
                 if(isEqualPressed) txtOperation.text = "2"
@@ -169,6 +178,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 this.str = txtOperation.text.toString()
                 isEqualPressed = false
                 isOperator = false
+                clickOnEqual()
             }
             R.id.btnThree -> {
                 if(isEqualPressed) txtOperation.text = "3"
@@ -176,6 +186,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 this.str = txtOperation.text.toString()
                 isEqualPressed = false
                 isOperator = false
+                clickOnEqual()
             }
             R.id.btnFour -> {
                 if(isEqualPressed) txtOperation.text = "4"
@@ -183,6 +194,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 this.str = txtOperation.text.toString()
                 isEqualPressed = false
                 isOperator = false
+                clickOnEqual()
             }
             R.id.btnFive -> {
                 if(isEqualPressed) txtOperation.text = "5"
@@ -190,6 +202,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 this.str = txtOperation.text.toString()
                 isEqualPressed = false
                 isOperator = false
+                clickOnEqual()
             }
             R.id.btnSix -> {
                 if(isEqualPressed) txtOperation.text = "6"
@@ -197,6 +210,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 this.str = txtOperation.text.toString()
                 isEqualPressed = false
                 isOperator = false
+                clickOnEqual()
             }
             R.id.btnSeven -> {
                 if(isEqualPressed) txtOperation.text = "7"
@@ -204,6 +218,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 this.str = txtOperation.text.toString()
                 isEqualPressed = false
                 isOperator = false
+                clickOnEqual()
             }
             R.id.btnEight -> {
                 if(isEqualPressed) txtOperation.text = "8"
@@ -211,6 +226,7 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 this.str = txtOperation.text.toString()
                 isEqualPressed = false
                 isOperator = false
+                clickOnEqual()
             }
             R.id.btnNine -> {
                 if(isEqualPressed) txtOperation.text = "9"
@@ -218,17 +234,23 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 this.str = txtOperation.text.toString()
                 isEqualPressed = false
                 isOperator = false
+                clickOnEqual()
             }
 
             R.id.btnBox -> {}
             R.id.btnDot -> txtOperation.append(".")
             R.id.btnEqual -> {
+                changeOperationToSmallTextSize()
                 isEqualPressed = true
                 clickOnEqual()
             }
 
             R.id.btnPlus -> {
                 isOperator = true
+                if(isEqualPressed) {
+                    txtOperation.text = resultString
+                    this.str = resultString
+                }
                 if(isOperator) {
                     operatorCorrection("+")
                 }
@@ -236,6 +258,10 @@ class FirstFragment : Fragment(),View.OnClickListener {
             }
             R.id.btnMinus -> {
                 isOperator = true
+                if(isEqualPressed) {
+                    txtOperation.text = resultString
+                    this.str = resultString
+                }
                 if(isOperator) {
                     txtOperation.text = this.str
                     txtOperation.append("-")
@@ -244,6 +270,10 @@ class FirstFragment : Fragment(),View.OnClickListener {
             }
             R.id.btnCross -> {
                 isOperator = true
+                if(isEqualPressed) {
+                    txtOperation.text = resultString
+                    this.str = resultString
+                }
                 if(isOperator) {
                     operatorCorrection("⨯")
                 }
@@ -251,6 +281,10 @@ class FirstFragment : Fragment(),View.OnClickListener {
             }
             R.id.btnDivide -> {
                 isOperator = true
+                if(isEqualPressed) {
+                    txtOperation.text = resultString
+                    this.str = resultString
+                }
                 if(isOperator) {
                     operatorCorrection("÷")
                 }
@@ -258,6 +292,10 @@ class FirstFragment : Fragment(),View.OnClickListener {
             }
             R.id.btnPercent -> {
                 isOperator = true
+                if(isEqualPressed) {
+                    txtOperation.text = resultString
+                    this.str = resultString
+                }
                 if(isOperator) {
                     operatorCorrection("%")
                 }
@@ -273,9 +311,10 @@ class FirstFragment : Fragment(),View.OnClickListener {
                 isOperator = false
             }
             R.id.btnClear -> {
+                isEqualPressed = false
                 this.str = ""
                 txtOperation.text = ""
-                txtResult.text = "0"
+                txtResult.text = "0.0"
                 txtResult.textSize = 35.0f
                 txtResult.typeface = Typeface.DEFAULT_BOLD
             }

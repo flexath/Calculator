@@ -14,34 +14,63 @@ class Calculator {
     private fun divide(firstNumber:Double,secondNumber:Double) : Double = firstNumber/secondNumber
     private fun mod(firstNumber:Double,secondNumber:Double) : Double = firstNumber%secondNumber
 
-    fun calculatedResult() : Double {
+    fun calculatedResult(): Double {
 
-        if(stack?.get(0).toString() == "-") {       // For only one first operator
-            stack?.insertElementAt("0",0)
-        }
-
-        if(stack?.size == 1 || stack?.size == 0) {
+        if(stack?.size == 1) {
             return result
         }else{
-            if(stack!![1] == "+") {
-                result = add(stack!![0].toDouble(),stack!![2].toDouble())
+            if(stack?.get(0).toString() == "-") {       // For only one first operator
+                stack?.insertElementAt("0",0)
             }
-            else if(stack!![1] == "-") {
-                result = subtract(stack!![0].toDouble(),stack!![2].toDouble())
+            if(stack?.contains("⨯") == true || stack?.contains("÷") == true || stack?.contains("%") == true) {
+                for(i in 1 until (stack?.size!!-1) step 2) {
+                    if(stack!![i] == "⨯") {
+                        result = multiply(stack!![i-1].toDouble(),stack!![i+1].toDouble())
+                        stack?.add(i-1, result.toString())
+                        stack?.removeAt(i)
+                        stack?.removeAt(i)
+                        stack?.removeAt(i)
+                        return calculatedResult()
+                    }
+                    else if(stack!![i] == "÷"){
+                        result = divide(stack!![i -1].toDouble(),stack!![i+1].toDouble())
+                        stack?.add(i-1, result.toString())
+                        stack?.removeAt(i)
+                        stack?.removeAt(i)
+                        stack?.removeAt(i)
+                        return calculatedResult()
+                    }
+                    else if(stack!![i] == "%") {
+                        result = mod(stack!![i -1].toDouble(),stack!![i+1].toDouble())
+                        stack?.add(i-1, result.toString())
+                        stack?.removeAt(i)
+                        stack?.removeAt(i)
+                        stack?.removeAt(i)
+                        return calculatedResult()
+                    }
+                }
             }
-            else if(stack!![1] == "⨯") {
-                result = multiply(stack!![0].toDouble(),stack!![2].toDouble())
+
+            while(stack?.contains("+") == true || stack?.contains("-") == true) {
+                for(i in 1 until (stack?.size!!-1) step 2) {
+                    if(stack!![i] == "+") {
+                        result = add(stack!![i-1].toDouble(),stack!![i+1].toDouble())
+                        stack?.add(i-1, result.toString())
+                        stack?.removeAt(i)
+                        stack?.removeAt(i)
+                        stack?.removeAt(i)
+                        return calculatedResult()
+                    }
+                    else if(stack!![i] == "-"){
+                        result = subtract(stack!![i -1].toDouble(),stack!![i+1].toDouble())
+                        stack?.add(i-1, result.toString())
+                        stack?.removeAt(i)
+                        stack?.removeAt(i)
+                        stack?.removeAt(i)
+                        return calculatedResult()
+                    }
+                }
             }
-            else if(stack!![1] == "÷") {
-                result = divide(stack!![0].toDouble(),stack!![2].toDouble())
-            }
-            else if(stack!![1] == "%") {
-                result = mod(stack!![0].toDouble(),stack!![2].toDouble())
-            }
-            stack?.removeFirst()
-            stack?.removeFirst()
-            stack?.removeFirst()
-            stack?.add(0, result.toString())
             return calculatedResult()
         }
     }
