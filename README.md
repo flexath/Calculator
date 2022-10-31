@@ -9,7 +9,7 @@ It is my fifth project on android development.
 
 3 - Dagger Hilt for Dependency Injection
 
-4 - ViewModel and LiveData
+4 - ViewModel , LiveData and Coroutines
 
 5 - Navigation Components
 
