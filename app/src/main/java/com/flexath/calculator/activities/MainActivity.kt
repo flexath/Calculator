@@ -3,6 +3,7 @@ package com.flexath.calculator.activities
 import android.content.res.ColorStateList
 import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
@@ -128,8 +129,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
     private fun clickOnEqual() {
 
         if(this.str!!.last() in calculator.operators) {
-            binding.tvOperation.append("0").toString()
-            this.str = binding.tvOperation.text.toString()
+            this.str = StringBuilder(this.str ?: "0").deleteCharAt(this.str!!.lastIndex).toString()
             binding.tvOperation.text = this.str
         }
 
@@ -145,8 +145,14 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
             viewModelFirst.calculatedResult()
             resultString = stack?.peek().toString()
-            val result = "= " + stack?.peek().toString()
+            var result = "= " + stack?.peek().toString()
 
+            if(resultString.last() == '0' && resultString[resultString.lastIndex-1] == '.') {
+                result = resultString.toDouble().toInt().toString()
+                binding.tvResult.text = result
+                resultString = result
+                return
+            }
             binding.tvResult.text =  result
         }
     }
