@@ -99,11 +99,14 @@ class CalculatorLibrary {
 
     private fun removeFirstOperator(stringTxt:String) : String {
         var string = stringTxt
-        if(string[0] == '-') {
-            stack?.push(string[0].toString())
-            string = (StringBuilder(string).deleteCharAt(0)).toString()
-        }else if(string[0] != '-' && string[0] in operators) {
-            string = (StringBuilder(string).deleteCharAt(0)).toString()
+
+        if(string.isNotEmpty()) {
+            if(string[0] == '-') {
+                stack?.push(string[0].toString())
+                string = (StringBuilder(string).deleteCharAt(0)).toString()
+            }else if(string[0] != '-' && string[0] in operators) {
+                string = (StringBuilder(string).deleteCharAt(0)).toString()
+            }
         }
         return string
     }

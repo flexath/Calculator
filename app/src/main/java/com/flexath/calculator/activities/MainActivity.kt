@@ -128,17 +128,17 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
     private fun clickOnEqual() {
 
-        if(this.str!!.last() in calculator.operators) {
-            this.str = StringBuilder(this.str ?: "0").deleteCharAt(this.str!!.lastIndex).toString()
-            binding.tvOperation.text = this.str
-        }
-
-        if(this.str!!.first() =='0') {
-            this.str = StringBuilder(this.str ?: "0").deleteCharAt(0).toString()
-            binding.tvOperation.text = this.str
-        }
-
         if(this.str!!.isNotEmpty()) {
+
+            if(this.str!!.last() in calculator.operators) {
+                this.str = StringBuilder(this.str ?: "0").deleteCharAt(this.str!!.lastIndex).toString()
+                binding.tvOperation.text = this.str
+            }
+
+            if(this.str!!.first() =='0') {
+                this.str = StringBuilder(this.str ?: "0").deleteCharAt(0).toString()
+                binding.tvOperation.text = this.str
+            }
 
             stack = viewModelFirst.calculateString(this.str!!)
             //txtOperation.text = stack?.joinToString("","","")
@@ -324,6 +324,15 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
                 this.str = binding.tvOperation.text.toString()
                 if(this.str!!.isNotEmpty()) {
                     this.str = StringBuilder(this.str.toString()).deleteCharAt(this.str!!.lastIndex).toString()
+                    binding.tvOperation.text = this.str
+                }else {
+                    this.str = "0"
+                    resultString = "0"
+                    binding.tvResult.text =  this.str
+                    binding.tvOperation.text =  resultString
+                }
+                if(this.str!!.length == 1 && this.str!!.first() == '-') {
+                    this.str = "0"
                     binding.tvOperation.text = this.str
                 }
                 isEqualPressed = false
