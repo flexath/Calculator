@@ -1,5 +1,7 @@
 package com.flexath.calculator.activities
 
+import android.content.res.ColorStateList
+import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -124,6 +126,12 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
     }
 
     private fun clickOnEqual() {
+
+        if(this.str!!.last() in calculator.operators) {
+            binding.tvOperation.append("0").toString()
+            this.str = binding.tvOperation.text.toString()
+            binding.tvOperation.text = this.str
+        }
 
         if(this.str!!.first() =='0') {
             this.str = StringBuilder(this.str ?: "0").deleteCharAt(0).toString()
