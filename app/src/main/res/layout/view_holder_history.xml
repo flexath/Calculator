@@ -24,6 +24,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/margin_smaller"
         android:layout_weight="3.5"
+        android:textIsSelectable="true"
         android:fontFamily="@font/work_sans_medium"
         android:gravity="center_vertical"
         android:textColor="@color/white"
