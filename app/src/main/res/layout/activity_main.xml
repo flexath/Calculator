@@ -63,7 +63,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvResult"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/margin_medium"
@@ -75,7 +75,6 @@
             app:fontFamily="@font/work_sans_light"
             tools:ignore="NotSibling"
             tools:text="@string/zero_character" />
-
     </LinearLayout>
 
     <TableLayout

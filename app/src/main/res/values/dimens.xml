@@ -34,5 +34,7 @@
     <dimen name="text_big_3x">80sp</dimen>
     <dimen name="width_button">72dp</dimen>
     <dimen name="height_button">72dp</dimen>
+    <dimen name="txt_18sp">18sp</dimen>
+    <dimen name="margin_smaller">2dp</dimen>
 
 </resources>

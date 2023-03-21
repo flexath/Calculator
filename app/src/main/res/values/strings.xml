@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Calculator</string>
     <string name="zero_character">0</string>
+    <string name="history_lbl">History</string>
+    <string name="close_dialog_lbl">Close Dialog</string>
 </resources>
