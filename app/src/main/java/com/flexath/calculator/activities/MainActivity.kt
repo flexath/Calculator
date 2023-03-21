@@ -214,11 +214,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HistoryDelegate 
             resultString = stack?.peek().toString()
             var result = "= " + stack?.peek().toString()
 
-            if (resultString.last() == '0' && resultString[resultString.lastIndex - 1] == '.') {
-                result = resultString.toDouble().toInt().toString()
-                binding.tvResult.text = result
-                resultString = result
-                return
+
+            if(resultString.length != 1) {
+                if (resultString.last() == '0' && resultString[resultString.lastIndex - 1] == '.') {
+                    result = resultString.toDouble().toInt().toString()
+                    binding.tvResult.text = result
+                    resultString = result
+                    return
+                }
             }
             binding.tvResult.text = result
         }
